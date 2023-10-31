@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            groupBox1 = new GroupBox();
-            radioButton5 = new RadioButton();
-            radioButton4 = new RadioButton();
-            radioButton3 = new RadioButton();
-            radioButton2 = new RadioButton();
-            radioButton1 = new RadioButton();
+            grpExercices = new GroupBox();
+            rbtnTable = new RadioButton();
+            rbtnNetworkPropose = new RadioButton();
+            rbtnNetworkDecode = new RadioButton();
+            rbtnPropose = new RadioButton();
+            rbtnDecode = new RadioButton();
             menuStrip1 = new MenuStrip();
             fichierToolStripMenuItem = new ToolStripMenuItem();
             quitterToolStripMenuItem = new ToolStripMenuItem();
@@ -43,82 +43,82 @@
             btnTraining = new Button();
             btnExam = new Button();
             button1 = new Button();
-            groupBox1.SuspendLayout();
+            grpExercices.SuspendLayout();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
-            // groupBox1
+            // grpExercices
             // 
-            groupBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            groupBox1.Controls.Add(radioButton5);
-            groupBox1.Controls.Add(radioButton4);
-            groupBox1.Controls.Add(radioButton3);
-            groupBox1.Controls.Add(radioButton2);
-            groupBox1.Controls.Add(radioButton1);
-            groupBox1.Location = new Point(12, 27);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(254, 250);
-            groupBox1.TabIndex = 0;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Exercices";
+            grpExercices.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            grpExercices.Controls.Add(rbtnTable);
+            grpExercices.Controls.Add(rbtnNetworkPropose);
+            grpExercices.Controls.Add(rbtnNetworkDecode);
+            grpExercices.Controls.Add(rbtnPropose);
+            grpExercices.Controls.Add(rbtnDecode);
+            grpExercices.Location = new Point(12, 27);
+            grpExercices.Name = "grpExercices";
+            grpExercices.Size = new Size(254, 250);
+            grpExercices.TabIndex = 0;
+            grpExercices.TabStop = false;
+            grpExercices.Text = "Exercices";
             // 
-            // radioButton5
+            // rbtnTable
             // 
-            radioButton5.AutoSize = true;
-            radioButton5.Location = new Point(21, 134);
-            radioButton5.Name = "radioButton5";
-            radioButton5.Size = new Size(131, 19);
-            radioButton5.TabIndex = 4;
-            radioButton5.TabStop = true;
-            radioButton5.Text = "Tableau à compléter";
-            radioButton5.UseVisualStyleBackColor = true;
-            radioButton5.Visible = false;
+            rbtnTable.AutoSize = true;
+            rbtnTable.Location = new Point(21, 134);
+            rbtnTable.Name = "rbtnTable";
+            rbtnTable.Size = new Size(131, 19);
+            rbtnTable.TabIndex = 4;
+            rbtnTable.TabStop = true;
+            rbtnTable.Text = "Tableau à compléter";
+            rbtnTable.UseVisualStyleBackColor = true;
+            rbtnTable.Visible = false;
             // 
-            // radioButton4
+            // rbtnNetworkPropose
             // 
-            radioButton4.AutoSize = true;
-            radioButton4.Location = new Point(21, 109);
-            radioButton4.Name = "radioButton4";
-            radioButton4.Size = new Size(152, 19);
-            radioButton4.TabIndex = 3;
-            radioButton4.TabStop = true;
-            radioButton4.Text = "Proposer un SUR-réseau";
-            radioButton4.UseVisualStyleBackColor = true;
-            radioButton4.Visible = false;
+            rbtnNetworkPropose.AutoSize = true;
+            rbtnNetworkPropose.Location = new Point(21, 109);
+            rbtnNetworkPropose.Name = "rbtnNetworkPropose";
+            rbtnNetworkPropose.Size = new Size(152, 19);
+            rbtnNetworkPropose.TabIndex = 3;
+            rbtnNetworkPropose.TabStop = true;
+            rbtnNetworkPropose.Text = "Proposer un SUR-réseau";
+            rbtnNetworkPropose.UseVisualStyleBackColor = true;
+            rbtnNetworkPropose.Visible = false;
             // 
-            // radioButton3
+            // rbtnNetworkDecode
             // 
-            radioButton3.AutoSize = true;
-            radioButton3.Location = new Point(21, 84);
-            radioButton3.Name = "radioButton3";
-            radioButton3.Size = new Size(152, 19);
-            radioButton3.TabIndex = 2;
-            radioButton3.TabStop = true;
-            radioButton3.Text = "Décoder un sous-réseau";
-            radioButton3.UseVisualStyleBackColor = true;
-            radioButton3.Visible = false;
+            rbtnNetworkDecode.AutoSize = true;
+            rbtnNetworkDecode.Location = new Point(21, 84);
+            rbtnNetworkDecode.Name = "rbtnNetworkDecode";
+            rbtnNetworkDecode.Size = new Size(152, 19);
+            rbtnNetworkDecode.TabIndex = 2;
+            rbtnNetworkDecode.TabStop = true;
+            rbtnNetworkDecode.Text = "Décoder un sous-réseau";
+            rbtnNetworkDecode.UseVisualStyleBackColor = true;
+            rbtnNetworkDecode.Visible = false;
             // 
-            // radioButton2
+            // rbtnPropose
             // 
-            radioButton2.AutoSize = true;
-            radioButton2.Location = new Point(21, 59);
-            radioButton2.Name = "radioButton2";
-            radioButton2.Size = new Size(150, 19);
-            radioButton2.TabIndex = 1;
-            radioButton2.TabStop = true;
-            radioButton2.Text = "Proposer une adresse IP";
-            radioButton2.UseVisualStyleBackColor = true;
+            rbtnPropose.AutoSize = true;
+            rbtnPropose.Location = new Point(21, 59);
+            rbtnPropose.Name = "rbtnPropose";
+            rbtnPropose.Size = new Size(150, 19);
+            rbtnPropose.TabIndex = 1;
+            rbtnPropose.TabStop = true;
+            rbtnPropose.Text = "Proposer une adresse IP";
+            rbtnPropose.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // rbtnDecode
             // 
-            radioButton1.AutoSize = true;
-            radioButton1.Location = new Point(21, 34);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(147, 19);
-            radioButton1.TabIndex = 0;
-            radioButton1.TabStop = true;
-            radioButton1.Text = "Décoder une adresse IP";
-            radioButton1.UseVisualStyleBackColor = true;
+            rbtnDecode.AutoSize = true;
+            rbtnDecode.Location = new Point(21, 34);
+            rbtnDecode.Name = "rbtnDecode";
+            rbtnDecode.Size = new Size(147, 19);
+            rbtnDecode.TabIndex = 0;
+            rbtnDecode.TabStop = true;
+            rbtnDecode.Text = "Décoder une adresse IP";
+            rbtnDecode.UseVisualStyleBackColor = true;
             // 
             // menuStrip1
             // 
@@ -169,6 +169,7 @@
             btnTraining.TabIndex = 2;
             btnTraining.Text = "&Entraînement";
             btnTraining.UseVisualStyleBackColor = true;
+            btnTraining.Click += btnTraining_Click;
             // 
             // btnExam
             // 
@@ -197,13 +198,15 @@
             Controls.Add(button1);
             Controls.Add(btnExam);
             Controls.Add(btnTraining);
-            Controls.Add(groupBox1);
+            Controls.Add(grpExercices);
             Controls.Add(menuStrip1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             MainMenuStrip = menuStrip1;
+            MaximizeBox = false;
             Name = "Main";
             Text = "Adressage IP & sous-réseaux";
-            groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
+            grpExercices.ResumeLayout(false);
+            grpExercices.PerformLayout();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);
@@ -212,12 +215,12 @@
 
         #endregion
 
-        private GroupBox groupBox1;
-        private RadioButton radioButton5;
-        private RadioButton radioButton4;
-        private RadioButton radioButton3;
-        private RadioButton radioButton2;
-        private RadioButton radioButton1;
+        private GroupBox grpExercices;
+        private RadioButton rbtnTable;
+        private RadioButton rbtnNetworkPropose;
+        private RadioButton rbtnNetworkDecode;
+        private RadioButton rbtnPropose;
+        private RadioButton rbtnDecode;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem fichierToolStripMenuItem;
         private ToolStripMenuItem quitterToolStripMenuItem;
