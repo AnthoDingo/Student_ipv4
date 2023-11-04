@@ -31,7 +31,6 @@
             lblExercice = new Label();
             lblError = new Label();
             grpClasse = new GroupBox();
-            rbtnReserved = new RadioButton();
             rbtnE = new RadioButton();
             rbtnD = new RadioButton();
             rbtnC = new RadioButton();
@@ -51,6 +50,9 @@
             rbtnMA = new RadioButton();
             rbtnMNotConcerned = new RadioButton();
             grpAddress = new GroupBox();
+            label3 = new Label();
+            label2 = new Label();
+            label1 = new Label();
             lblBlock3 = new Label();
             lblBlock2 = new Label();
             lblBlock1 = new Label();
@@ -58,10 +60,25 @@
             btnBack = new Button();
             btnStop = new Button();
             btnAnswer = new Button();
+            pnlDecodeAnswer = new Panel();
+            lblSolutionMasque = new Label();
+            lblSolutionType = new Label();
+            lblSolutionClass = new Label();
+            lblSolution = new Label();
+            grpPropose = new GroupBox();
+            tbxBlock3 = new TextBox();
+            tbxBlock2 = new TextBox();
+            tbxBlock1 = new TextBox();
+            label4 = new Label();
+            label5 = new Label();
+            label6 = new Label();
+            tbxBlock0 = new TextBox();
             grpClasse.SuspendLayout();
             grpType.SuspendLayout();
             grpMasque.SuspendLayout();
             grpAddress.SuspendLayout();
+            pnlDecodeAnswer.SuspendLayout();
+            grpPropose.SuspendLayout();
             SuspendLayout();
             // 
             // lblExercice
@@ -71,7 +88,7 @@
             lblExercice.Name = "lblExercice";
             lblExercice.Size = new Size(179, 33);
             lblExercice.TabIndex = 0;
-            lblExercice.Text = "Nombre d'exercice(s) :";
+            lblExercice.Text = "Nombre d'exercice(s) : 0";
             lblExercice.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblError
@@ -82,13 +99,11 @@
             lblError.Name = "lblError";
             lblError.Size = new Size(179, 33);
             lblError.TabIndex = 1;
-            lblError.Text = "Nombre d'erreur(s) :";
+            lblError.Text = "Nombre d'erreur(s) : 0";
             lblError.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // grpClasse
             // 
-            grpClasse.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            grpClasse.Controls.Add(rbtnReserved);
             grpClasse.Controls.Add(rbtnE);
             grpClasse.Controls.Add(rbtnD);
             grpClasse.Controls.Add(rbtnC);
@@ -101,18 +116,6 @@
             grpClasse.TabStop = false;
             grpClasse.Text = "Classe";
             // 
-            // rbtnReserved
-            // 
-            rbtnReserved.AutoSize = true;
-            rbtnReserved.Location = new Point(48, 147);
-            rbtnReserved.Name = "rbtnReserved";
-            rbtnReserved.Size = new Size(83, 19);
-            rbtnReserved.TabIndex = 5;
-            rbtnReserved.TabStop = true;
-            rbtnReserved.Text = "Réservée ...";
-            rbtnReserved.UseVisualStyleBackColor = true;
-            rbtnReserved.Visible = false;
-            // 
             // rbtnE
             // 
             rbtnE.AutoSize = true;
@@ -123,7 +126,6 @@
             rbtnE.TabStop = true;
             rbtnE.Text = "E";
             rbtnE.UseVisualStyleBackColor = true;
-            rbtnE.Visible = false;
             // 
             // rbtnD
             // 
@@ -135,7 +137,6 @@
             rbtnD.TabStop = true;
             rbtnD.Text = "D";
             rbtnD.UseVisualStyleBackColor = true;
-            rbtnD.Visible = false;
             // 
             // rbtnC
             // 
@@ -162,6 +163,7 @@
             // rbtnA
             // 
             rbtnA.AutoSize = true;
+            rbtnA.CausesValidation = false;
             rbtnA.Location = new Point(49, 22);
             rbtnA.Name = "rbtnA";
             rbtnA.Size = new Size(33, 19);
@@ -172,7 +174,6 @@
             // 
             // grpType
             // 
-            grpType.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             grpType.Controls.Add(rbtnNotConcerned);
             grpType.Controls.Add(rbtnNetwork);
             grpType.Controls.Add(rbtnLoopback);
@@ -254,7 +255,7 @@
             // 
             // grpMasque
             // 
-            grpMasque.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            grpMasque.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             grpMasque.Controls.Add(rbtnMFull);
             grpMasque.Controls.Add(rbtnMC);
             grpMasque.Controls.Add(rbtnMB);
@@ -324,6 +325,9 @@
             // 
             // grpAddress
             // 
+            grpAddress.Controls.Add(label3);
+            grpAddress.Controls.Add(label2);
+            grpAddress.Controls.Add(label1);
             grpAddress.Controls.Add(lblBlock3);
             grpAddress.Controls.Add(lblBlock2);
             grpAddress.Controls.Add(lblBlock1);
@@ -334,6 +338,39 @@
             grpAddress.TabIndex = 5;
             grpAddress.TabStop = false;
             grpAddress.Text = "Je décode cette adresse ...";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Location = new Point(329, 19);
+            label3.Name = "label3";
+            label3.Size = new Size(27, 45);
+            label3.TabIndex = 6;
+            label3.Text = ".";
+            label3.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Location = new Point(211, 19);
+            label2.Name = "label2";
+            label2.Size = new Size(27, 45);
+            label2.TabIndex = 5;
+            label2.Text = ".";
+            label2.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(98, 19);
+            label1.Name = "label1";
+            label1.Size = new Size(27, 45);
+            label1.TabIndex = 4;
+            label1.Text = ".";
+            label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblBlock3
             // 
@@ -374,7 +411,7 @@
             // btnBack
             // 
             btnBack.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnBack.Location = new Point(12, 392);
+            btnBack.Location = new Point(12, 513);
             btnBack.Name = "btnBack";
             btnBack.Size = new Size(107, 52);
             btnBack.TabIndex = 6;
@@ -385,7 +422,7 @@
             // btnStop
             // 
             btnStop.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnStop.Location = new Point(160, 392);
+            btnStop.Location = new Point(160, 513);
             btnStop.Name = "btnStop";
             btnStop.Size = new Size(107, 52);
             btnStop.TabIndex = 7;
@@ -395,18 +432,151 @@
             // btnAnswer
             // 
             btnAnswer.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnAnswer.Location = new Point(273, 392);
+            btnAnswer.Enabled = false;
+            btnAnswer.Location = new Point(273, 513);
             btnAnswer.Name = "btnAnswer";
             btnAnswer.Size = new Size(107, 52);
             btnAnswer.TabIndex = 8;
             btnAnswer.Text = "&J'ai répondu";
             btnAnswer.UseVisualStyleBackColor = true;
             // 
+            // pnlDecodeAnswer
+            // 
+            pnlDecodeAnswer.Controls.Add(lblSolutionMasque);
+            pnlDecodeAnswer.Controls.Add(lblSolutionType);
+            pnlDecodeAnswer.Controls.Add(lblSolutionClass);
+            pnlDecodeAnswer.Controls.Add(lblSolution);
+            pnlDecodeAnswer.Location = new Point(12, 421);
+            pnlDecodeAnswer.Name = "pnlDecodeAnswer";
+            pnlDecodeAnswer.Size = new Size(476, 70);
+            pnlDecodeAnswer.TabIndex = 10;
+            // 
+            // lblSolutionMasque
+            // 
+            lblSolutionMasque.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lblSolutionMasque.BorderStyle = BorderStyle.Fixed3D;
+            lblSolutionMasque.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblSolutionMasque.Location = new Point(318, 35);
+            lblSolutionMasque.Name = "lblSolutionMasque";
+            lblSolutionMasque.Size = new Size(153, 23);
+            lblSolutionMasque.TabIndex = 11;
+            lblSolutionMasque.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lblSolutionType
+            // 
+            lblSolutionType.BorderStyle = BorderStyle.Fixed3D;
+            lblSolutionType.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblSolutionType.Location = new Point(159, 35);
+            lblSolutionType.Name = "lblSolutionType";
+            lblSolutionType.Size = new Size(153, 23);
+            lblSolutionType.TabIndex = 11;
+            lblSolutionType.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lblSolutionClass
+            // 
+            lblSolutionClass.BorderStyle = BorderStyle.Fixed3D;
+            lblSolutionClass.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblSolutionClass.Location = new Point(0, 35);
+            lblSolutionClass.Name = "lblSolutionClass";
+            lblSolutionClass.Size = new Size(153, 23);
+            lblSolutionClass.TabIndex = 11;
+            lblSolutionClass.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lblSolution
+            // 
+            lblSolution.AutoSize = true;
+            lblSolution.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblSolution.ForeColor = Color.IndianRed;
+            lblSolution.Location = new Point(0, 0);
+            lblSolution.Name = "lblSolution";
+            lblSolution.Size = new Size(123, 21);
+            lblSolution.TabIndex = 10;
+            lblSolution.Text = "La solution est ...";
+            // 
+            // grpPropose
+            // 
+            grpPropose.Controls.Add(tbxBlock3);
+            grpPropose.Controls.Add(tbxBlock2);
+            grpPropose.Controls.Add(tbxBlock1);
+            grpPropose.Controls.Add(label4);
+            grpPropose.Controls.Add(label5);
+            grpPropose.Controls.Add(label6);
+            grpPropose.Controls.Add(tbxBlock0);
+            grpPropose.Location = new Point(12, 343);
+            grpPropose.Name = "grpPropose";
+            grpPropose.Size = new Size(476, 59);
+            grpPropose.TabIndex = 11;
+            grpPropose.TabStop = false;
+            grpPropose.Text = "Je propose ...";
+            // 
+            // tbxBlock3
+            // 
+            tbxBlock3.Location = new Point(369, 23);
+            tbxBlock3.Name = "tbxBlock3";
+            tbxBlock3.Size = new Size(60, 23);
+            tbxBlock3.TabIndex = 12;
+            // 
+            // tbxBlock2
+            // 
+            tbxBlock2.Location = new Point(252, 23);
+            tbxBlock2.Name = "tbxBlock2";
+            tbxBlock2.Size = new Size(60, 23);
+            tbxBlock2.TabIndex = 11;
+            // 
+            // tbxBlock1
+            // 
+            tbxBlock1.Location = new Point(133, 22);
+            tbxBlock1.Name = "tbxBlock1";
+            tbxBlock1.Size = new Size(60, 23);
+            tbxBlock1.TabIndex = 10;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point);
+            label4.Location = new Point(327, 1);
+            label4.Name = "label4";
+            label4.Size = new Size(27, 45);
+            label4.TabIndex = 9;
+            label4.Text = ".";
+            label4.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point);
+            label5.Location = new Point(209, 1);
+            label5.Name = "label5";
+            label5.Size = new Size(27, 45);
+            label5.TabIndex = 8;
+            label5.Text = ".";
+            label5.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point);
+            label6.Location = new Point(96, 1);
+            label6.Name = "label6";
+            label6.Size = new Size(27, 45);
+            label6.TabIndex = 7;
+            label6.Text = ".";
+            label6.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // tbxBlock0
+            // 
+            tbxBlock0.Location = new Point(22, 22);
+            tbxBlock0.Name = "tbxBlock0";
+            tbxBlock0.Size = new Size(60, 23);
+            tbxBlock0.TabIndex = 0;
+            // 
             // IP
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(500, 456);
+            ClientSize = new Size(500, 577);
+            Controls.Add(grpPropose);
+            Controls.Add(pnlDecodeAnswer);
             Controls.Add(btnAnswer);
             Controls.Add(btnStop);
             Controls.Add(btnBack);
@@ -420,7 +590,7 @@
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "IP";
-            Text = "Decode";
+            Text = "Les classes IP";
             FormClosed += Decode_FormClosed;
             Load += Decode_Load;
             grpClasse.ResumeLayout(false);
@@ -430,6 +600,11 @@
             grpMasque.ResumeLayout(false);
             grpMasque.PerformLayout();
             grpAddress.ResumeLayout(false);
+            grpAddress.PerformLayout();
+            pnlDecodeAnswer.ResumeLayout(false);
+            pnlDecodeAnswer.PerformLayout();
+            grpPropose.ResumeLayout(false);
+            grpPropose.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -438,7 +613,6 @@
         private Label lblExercice;
         private Label lblError;
         private GroupBox grpClasse;
-        private RadioButton rbtnReserved;
         private RadioButton rbtnE;
         private RadioButton rbtnD;
         private RadioButton rbtnC;
@@ -465,5 +639,21 @@
         private Label lblBlock1;
         private Label lblBlock2;
         private Label lblBlock3;
+        private Panel pnlDecodeAnswer;
+        private Label lblSolution;
+        private Label lblSolutionClass;
+        private Label lblSolutionType;
+        private Label lblSolutionMasque;
+        private Label label3;
+        private Label label2;
+        private Label label1;
+        private GroupBox grpPropose;
+        private TextBox tbxBlock3;
+        private TextBox tbxBlock2;
+        private TextBox tbxBlock1;
+        private Label label4;
+        private Label label5;
+        private Label label6;
+        private TextBox tbxBlock0;
     }
 }

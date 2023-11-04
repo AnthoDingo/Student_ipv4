@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using IPv4.Class;
+using IPv4.Converter;
 
 namespace IPv4.Forms
 {
@@ -17,20 +10,18 @@ namespace IPv4.Forms
             InitializeComponent();
         }
 
-        private RadioButton getChecked()
-        {
-            return grpExercices.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked);
-        }
-
         private void btnTraining_Click(object sender, EventArgs e)
         {
-            switch (getChecked().Name)
+            RadioButton exercice = GroupBoxCheckedRadioButton.GetChecked(grpExercices);
+            switch (exercice.Name)
             {
                 case "rbtnDecode":
-                    IP frmIP = new IP(this);
-                    frmIP.Show();
+                    IP frmDecode = new IP(this, Mode.Decode);
+                    frmDecode.Show();
                     break;
                 case "rbtnPropose":
+                    IP frmPropose = new IP(this, Mode.Propose);
+                    frmPropose.Show();
                     break;
                 case "rbtnNetworkDecode":
                     break;
