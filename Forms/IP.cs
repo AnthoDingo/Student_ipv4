@@ -1,5 +1,7 @@
-﻿using IPv4.Class;
+﻿using System.Linq;
+using IPv4.Class;
 using IPv4.Converter;
+using System.Diagnostics;
 using Type = IPv4.Class.Type;
 
 namespace IPv4.Forms
@@ -184,6 +186,7 @@ namespace IPv4.Forms
             if (selectedClass == null || selectedType == null || selectedMasque == null)
             {
                 MessageBox.Show("Une sélection est manquante", "Valeur manquante", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+                Errors += 1;
                 return;
             }
 
@@ -336,6 +339,7 @@ namespace IPv4.Forms
         private Thread[] Proposes = new Thread[2];
         private List<RadioButton> _btnsClass;
         private List<RadioButton> _btnsType;
+        private List<TextBox> _tbxProposes;
 
         private void initPropose()
         {
@@ -346,9 +350,40 @@ namespace IPv4.Forms
 
             _btnsClass = grpClasse.Controls.OfType<RadioButton>().OrderBy(r => r.TabIndex).ToList();
             _btnsType = grpType.Controls.OfType<RadioButton>().OrderBy(r => r.TabIndex).ToList();
+            _tbxProposes = grpPropose.Controls.OfType<TextBox>().OrderBy(t => t.TabIndex).ToList();
 
             btnStop.Click += StopPropose;
+            btnAnswer.Click += AnswerPropose;
             //startProposeThreads();
+
+            tbxBlock0.KeyPress += tbxTextChange;
+            tbxBlock1.KeyPress += tbxTextChange;
+            tbxBlock2.KeyPress += tbxTextChange;
+            tbxBlock3.KeyPress += tbxTextChange;
+        }
+
+        private void tbxTextChange(object sender, KeyPressEventArgs e)
+        {
+            if(e.KeyChar == '.')
+            {
+                Control control = sender as Control;
+                if (control != null)
+                {
+                    int tabIndex = control.TabIndex;
+                    int nextIndex = tabIndex + 1;
+                    if (nextIndex < 4)
+                    {
+                        TextBox next =_tbxProposes.First(tbx => tbx.TabIndex == nextIndex);
+                        next.Focus();                        
+                    }
+                    e.Handled = true;
+                }
+            }
+
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
 
         private void startProposeThreads()
@@ -361,6 +396,16 @@ namespace IPv4.Forms
 
             resetLabelSolution(lblSolutionClass);
             resetLabelSolution(lblSolutionType);
+            resetTextBox(tbxBlock0);
+            resetTextBox(tbxBlock1);
+            resetTextBox(tbxBlock2);
+            resetTextBox(tbxBlock3);
+        }
+
+        private void resetTextBox(TextBox tbx)
+        {
+            tbx.BackColor = SystemColors.Window;
+            tbx.Text = string.Empty;
         }
 
         private void StopPropose(object sender, EventArgs e)
@@ -373,6 +418,7 @@ namespace IPv4.Forms
                     btnStop.Text = "&Générer";
                     btnAnswer.Enabled = true;
                     btnStop.Enabled = false;
+                    tbxBlock0.Focus();
                     break;
                 case "&Générer":
                     btnStop.Text = "&Arrêter";
@@ -384,7 +430,100 @@ namespace IPv4.Forms
 
         private void AnswerPropose(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(tbxBlock0.Text) || string.IsNullOrEmpty(tbxBlock1.Text) || string.IsNullOrEmpty(tbxBlock2.Text) || string.IsNullOrEmpty(tbxBlock3.Text))
+            {
+                MessageBox.Show("Un block de l'adresse IP est vide", "Valeur incorrecte", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+                Errors += 1;
+                return;
+            }
 
+            RadioButton selectedClass = GroupBoxCheckedRadioButton.GetChecked(grpClasse);
+            RadioButton selectedType = GroupBoxCheckedRadioButton.GetChecked(grpType);
+            string result = $"{selectedClass.TabIndex}{selectedType.TabIndex}";
+
+            int valueBlock0 = Convert.ToInt32(tbxBlock0.Text);
+            int valueBlock1 = Convert.ToInt32(tbxBlock1.Text);
+            int valueBlock2 = Convert.ToInt32(tbxBlock2.Text);
+            int valueBlock3 = Convert.ToInt32(tbxBlock3.Text);
+
+            switch (result)
+            {
+                case "00":
+                    CheckValue(tbxBlock0, 0, 126);
+                    CheckOutOfRange(tbxBlock1);
+                    CheckOutOfRange(tbxBlock2);
+                    CheckValue(tbxBlock3, 1, 254);
+                    break;
+                case "02":
+                    CheckValue(tbxBlock0, 0, 126);
+                    CheckOutOfRange(tbxBlock1);
+                    CheckOutOfRange(tbxBlock2);
+                    CheckValue(tbxBlock3, 255);
+                    break;
+                case "03":
+                    CheckValue(tbxBlock0, 127, 127);
+                    CheckOutOfRange(tbxBlock1);
+                    CheckOutOfRange(tbxBlock2);
+                    CheckOutOfRange(tbxBlock3);
+                    break;
+                case "04":
+                    CheckValue(tbxBlock0, 0, 127);
+                    CheckOutOfRange(tbxBlock1);
+                    CheckOutOfRange(tbxBlock2);
+                    CheckValue(tbxBlock3, 0, 0);
+                    break;
+                case "10":
+                    CheckValue(tbxBlock0, 128, 191);
+                    CheckOutOfRange(tbxBlock1);
+                    CheckOutOfRange(tbxBlock2);
+                    CheckValue(tbxBlock3, 1, 254);
+                    break;
+                case "12":
+                    CheckValue(tbxBlock0, 128, 191);
+                    CheckOutOfRange(tbxBlock1);
+                    CheckOutOfRange(tbxBlock2);
+                    CheckValue(tbxBlock3, 255);
+                    break;
+                case "14":
+                    CheckValue(tbxBlock0, 128, 191);
+                    CheckOutOfRange(tbxBlock1);
+                    CheckOutOfRange(tbxBlock2);
+                    CheckValue(tbxBlock3, 0, 0);
+                    break;
+                case "20":
+                    CheckValue(tbxBlock0, 192, 223);
+                    CheckOutOfRange(tbxBlock1);
+                    CheckOutOfRange(tbxBlock2);
+                    CheckValue(tbxBlock3, 1, 254);
+                    break;
+                case "22":
+                    CheckValue(tbxBlock0, 192, 223);
+                    CheckOutOfRange(tbxBlock1);
+                    CheckOutOfRange(tbxBlock2);
+                    CheckValue(tbxBlock3, 255);
+                    break;
+                case "24":
+                    CheckValue(tbxBlock0, 192, 223);
+                    CheckOutOfRange(tbxBlock1);
+                    CheckOutOfRange(tbxBlock2);
+                    CheckValue(tbxBlock3, 0, 0);
+                    break;
+                case "31":
+                    CheckValue(tbxBlock0, 224, 239);
+                    CheckOutOfRange(tbxBlock1);
+                    CheckOutOfRange(tbxBlock2);
+                    CheckOutOfRange(tbxBlock3);
+                    break;
+                case "45":
+                    CheckValue(tbxBlock0, 240, 255);
+                    CheckOutOfRange(tbxBlock1);
+                    CheckOutOfRange(tbxBlock2);
+                    CheckValue(tbxBlock3, 0, 254);
+                    break;
+            }
+
+            btnAnswer.Enabled = false;
+            btnStop.Enabled = true;
         }
 
         private void UpdateRadioButton(object obj)
@@ -438,7 +577,7 @@ namespace IPv4.Forms
                 if (typeButton.InvokeRequired)
                 {
                     typeButton.Invoke(new Action(() => typeButton.Checked = true));
-                } 
+                }
                 else
                 {
                     typeButton.Checked = true;
@@ -453,6 +592,72 @@ namespace IPv4.Forms
             }
         }
 
+        private void CheckOutOfRange(TextBox tbx)
+        {
+            int value = Convert.ToInt32(tbx.Text);
+            if (value < 0 || value > 255)
+            {
+                Errors += 1;
+                tbx.BackColor = Color.IndianRed;
+            }
+            else
+            {
+                tbx.BackColor = Color.LimeGreen;
+            }
+        }
+        private void CheckValue(TextBox tbx, int min, int? max = null)
+        {
+            int value = Convert.ToInt32(tbx.Text);
+
+            if (value < 0 || value > 255)
+            {
+                Errors += 1;
+                tbx.BackColor = Color.IndianRed;
+                return;
+            }
+
+            if (max == null)
+            {
+                if (value >= min)
+                {
+                    tbx.BackColor = Color.LimeGreen;
+                }
+                else
+                {
+                    Errors += 1;
+                    tbx.BackColor = Color.IndianRed;
+                }
+            }
+            else
+            {
+                if(min == max)
+                {
+                    if(value == min)
+                    {
+                        tbx.BackColor = Color.LimeGreen;
+                    } 
+                    else
+                    {
+                        Errors += 1;
+                        tbx.BackColor = Color.IndianRed;
+                    }
+
+
+                    return;
+
+                }
+
+                if (value >= min && value <= max)
+                {
+                    tbx.BackColor = Color.LimeGreen;
+                }
+                else
+                {
+                    Errors += 1;
+                    tbx.BackColor = Color.IndianRed;
+                }
+            }
+        }
         #endregion
     }
 }

@@ -514,21 +514,24 @@
             tbxBlock3.Location = new Point(369, 23);
             tbxBlock3.Name = "tbxBlock3";
             tbxBlock3.Size = new Size(60, 23);
-            tbxBlock3.TabIndex = 12;
+            tbxBlock3.TabIndex = 3;
+            tbxBlock3.TextAlign = HorizontalAlignment.Center;
             // 
             // tbxBlock2
             // 
             tbxBlock2.Location = new Point(252, 23);
             tbxBlock2.Name = "tbxBlock2";
             tbxBlock2.Size = new Size(60, 23);
-            tbxBlock2.TabIndex = 11;
+            tbxBlock2.TabIndex = 2;
+            tbxBlock2.TextAlign = HorizontalAlignment.Center;
             // 
             // tbxBlock1
             // 
             tbxBlock1.Location = new Point(133, 22);
             tbxBlock1.Name = "tbxBlock1";
             tbxBlock1.Size = new Size(60, 23);
-            tbxBlock1.TabIndex = 10;
+            tbxBlock1.TabIndex = 1;
+            tbxBlock1.TextAlign = HorizontalAlignment.Center;
             // 
             // label4
             // 
@@ -569,6 +572,7 @@
             tbxBlock0.Name = "tbxBlock0";
             tbxBlock0.Size = new Size(60, 23);
             tbxBlock0.TabIndex = 0;
+            tbxBlock0.TextAlign = HorizontalAlignment.Center;
             // 
             // IP
             // 

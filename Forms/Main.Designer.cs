@@ -179,6 +179,7 @@
             btnExam.TabIndex = 3;
             btnExam.Text = "&Devoir";
             btnExam.UseVisualStyleBackColor = true;
+            btnExam.Click += btnExam_Click;
             // 
             // button1
             // 
@@ -188,7 +189,7 @@
             button1.TabIndex = 4;
             button1.Text = "Décimale pointée <-> Décimale (32 bits)";
             button1.UseVisualStyleBackColor = true;
-            button1.Visible = false;
+            button1.Click += button1_Click;
             // 
             // Main
             // 
