@@ -144,6 +144,18 @@ namespace IPv4.Forms
                 this.Close();
             }
         }
+
+        private void SetGoodLabel(Label lbl)
+        {
+            lbl.BackColor = Color.LimeGreen;
+        }
+
+        private void SetBadLabel(Label lbl)
+        {
+            Errors += 1;
+            lbl.BackColor = Color.IndianRed;
+
+        }
         #endregion
 
         #region Mode Decode
@@ -247,141 +259,36 @@ namespace IPv4.Forms
                 return;
             }
 
-            int block0 = Convert.ToInt32(lblBlock0.Text);
-            int block1 = Convert.ToInt32(lblBlock1.Text);
-            int block2 = Convert.ToInt32(lblBlock2.Text);
-            int block3 = Convert.ToInt32(lblBlock3.Text);
-
-            if (block0 < 128)
-            {
-                lblSolutionClass.Text = Classe.A;
-            }
-            else if (block0 < 192)
-            {
-                lblSolutionClass.Text = Classe.B;
-            }
-            else if (block0 < 224)
-            {
-                lblSolutionClass.Text = Classe.C;
-            }
-            else if (block0 < 240)
-            {
-                lblSolutionClass.Text = Classe.D;
-            }
-            else
-            {
-                lblSolutionClass.Text = Classe.E;
-            }
-
-
+            Address address = new Address(Convert.ToInt32(lblBlock0.Text), Convert.ToInt32(lblBlock1.Text), Convert.ToInt32(lblBlock2.Text), Convert.ToInt32(lblBlock3.Text));
+            
+            lblSolutionClass.Text = address.Classe;
             if (selectedClass.Text.Equals(lblSolutionClass.Text))
             {
-                lblSolutionClass.BackColor = Color.LimeGreen;
+                SetGoodLabel(lblSolutionClass);
             }
             else
             {
-                Errors += 1;
-                lblSolutionClass.BackColor = Color.IndianRed;
+                SetBadLabel(lblSolutionClass);
             }
 
-
-            lblSolutionType.Text = Type.Unicast;
-            switch (lblSolutionClass.Text)
-            {
-                case "A":
-                    if (block0 == 127)
-                    {
-                        lblSolutionType.Text = Type.Loopback;
-                        break;
-                    }
-
-                    if (block1 == 0 & block2 == 0 & block3 == 0)
-                    {
-                        lblSolutionType.Text = Type.Network;
-                        break;
-                    }
-
-                    if (block1 == 255 & block2 == 255 & block3 == 255)
-                    {
-                        lblSolutionType.Text = Type.Broadcast;
-                        break;
-                    }
-
-                    break;
-                case "B":
-
-                    if (block2 == 0 & block3 == 0)
-                    {
-                        lblSolutionType.Text = Type.Network;
-                        break;
-                    }
-
-                    if (block2 == 255 & block3 == 255)
-                    {
-                        lblSolutionType.Text = Type.Broadcast;
-                        break;
-                    }
-                    break;
-                case "C":
-
-                    if (block3 == 0)
-                    {
-                        lblSolutionType.Text = Type.Network;
-                        break;
-                    }
-
-                    if (block3 == 255)
-                    {
-                        lblSolutionType.Text = Type.Broadcast;
-                        break;
-                    }
-                    break;
-                case "D":
-                    lblSolutionType.Text = Type.Multicast;
-                    break;
-                case "E":
-                    lblSolutionType.Text = Type.NotConcerned;
-                    break;
-            }
-
+            lblSolutionType.Text = address.Type;
             if (selectedType.Text.Equals(lblSolutionType.Text))
             {
-                lblSolutionType.BackColor = Color.LimeGreen;
+                SetGoodLabel(lblSolutionType);
             }
             else
             {
-                Errors += 1;
-                lblSolutionType.BackColor = Color.IndianRed;
+                SetBadLabel(lblSolutionType);
             }
 
-            switch (lblSolutionClass.Text)
-            {
-                case "A":
-                    lblSolutionMasque.Text = Masque.A;
-                    break;
-                case "B":
-                    lblSolutionMasque.Text = Masque.B;
-                    break;
-                case "C":
-                    lblSolutionMasque.Text = Masque.C;
-                    break;
-                case "D":
-                    lblSolutionMasque.Text = Masque.Full;
-                    break;
-                case "E":
-                case "Réservé ...":
-                    lblSolutionMasque.Text = Masque.NotConcerned;
-                    break;
-            }
-
+            lblSolutionMasque.Text = address.Masque;
             if (selectedMasque.Text.Equals(lblSolutionMasque.Text))
             {
-                lblSolutionMasque.BackColor = Color.LimeGreen;
+                SetGoodLabel(lblSolutionMasque);
             }
             else
             {
-                Errors += 1;
-                lblSolutionMasque.BackColor = Color.IndianRed;
+                SetBadLabel(lblSolutionMasque);
             }
 
             btnAnswer.Enabled = false;
@@ -578,6 +485,10 @@ namespace IPv4.Forms
                     CheckValue(tbxBlock3, 0, 254);
                     break;
             }
+
+            Address address = new Address(Convert.ToInt32(tbxBlock0.Text), Convert.ToInt32(tbxBlock1.Text), Convert.ToInt32(tbxBlock2.Text), Convert.ToInt32(tbxBlock3.Text));
+            lblSolutionClass.Text = address.Classe;
+            lblSolutionType.Text = address.Type;
 
             btnAnswer.Enabled = false;
             btnStop.Enabled = true;
