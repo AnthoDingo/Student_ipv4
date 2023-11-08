@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IP));
             lblExercice = new Label();
             lblError = new Label();
             grpClasse = new GroupBox();
@@ -591,6 +592,7 @@
             Controls.Add(lblError);
             Controls.Add(lblExercice);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "IP";

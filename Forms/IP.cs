@@ -20,6 +20,8 @@ namespace IPv4.Forms
         private List<RadioButton> _btnsType;
         private List<RadioButton> _btnsMasque;
 
+        private bool RunningThreads = true;
+
         public IP(Main frmMain, Mode mode = Mode.Decode, bool IsExam = false)
         {
             InitializeComponent();
@@ -114,6 +116,7 @@ namespace IPv4.Forms
 
         private void Decode_FormClosed(object sender, FormClosedEventArgs e)
         {
+            RunningThreads = false;
             formClose();
         }
 
@@ -132,7 +135,7 @@ namespace IPv4.Forms
             if (!_isExam)
                 return;
 
-            if(Exercices == _setting.Number)
+            if (Exercices == _setting.Number)
             {
                 string passwd = Interaction.InputBox("Bravo, vous avez finis.\r\nAppelez le prof pour valider votre exam.", "Terminé");
                 while (!_setting.Password.Equals(passwd))
@@ -160,7 +163,6 @@ namespace IPv4.Forms
 
         #region Mode Decode
 
-        private bool RunningDecode = true;
         private Thread[] Decodes = new Thread[4];
         private void initDecode()
         {
@@ -204,7 +206,7 @@ namespace IPv4.Forms
 
         private void StopDecode(object sender, EventArgs e)
         {
-            RunningDecode = !RunningDecode;
+            RunningThreads = !RunningThreads;
             switch (btnStop.Text)
             {
                 case "&Arrêter":
@@ -227,17 +229,19 @@ namespace IPv4.Forms
             int maxRandom = data.Item2;
             Random random = new Random();
 
-            while (RunningDecode)
+            while (RunningThreads)
             {
                 int randomNumber = random.Next(0, maxRandom);
 
                 if (label.InvokeRequired)
                 {
-                    label.Invoke(new Action(() => label.Text = randomNumber.ToString()));
+                    if(RunningThreads)
+                        label.Invoke(new Action(() => label.Text = randomNumber.ToString()));
                 }
                 else
                 {
-                    label.Text = randomNumber.ToString();
+                    if(RunningThreads)
+                        label.Text = randomNumber.ToString();
                 }
 #if DEBUG
                 Thread.Sleep(1000);
@@ -260,7 +264,7 @@ namespace IPv4.Forms
             }
 
             Address address = new Address(Convert.ToInt32(lblBlock0.Text), Convert.ToInt32(lblBlock1.Text), Convert.ToInt32(lblBlock2.Text), Convert.ToInt32(lblBlock3.Text));
-            
+
             lblSolutionClass.Text = address.Classe;
             if (selectedClass.Text.Equals(lblSolutionClass.Text))
             {
@@ -300,10 +304,6 @@ namespace IPv4.Forms
         #endregion
 
         #region Mode Propose
-
-        private bool RunningPropose = true;
-        private Thread[] Proposes = new Thread[2];
-
         private List<TextBox> _tbxProposes;
 
         private void initPropose()
@@ -374,7 +374,7 @@ namespace IPv4.Forms
 
         private void StopPropose(object sender, EventArgs e)
         {
-            RunningPropose = !RunningPropose;
+            RunningThreads = !RunningThreads;
             switch (btnStop.Text)
             {
                 case "&Arrêter":
@@ -508,7 +508,7 @@ namespace IPv4.Forms
             //int maxRandom = radioButtons.Count();
             Random random = new Random();
 
-            while (RunningPropose)
+            while (RunningThreads)
             {
                 int index = random.Next(0, btnsClass.Count);
                 RadioButton classButton = btnsClass[index];
@@ -537,20 +537,24 @@ namespace IPv4.Forms
 
                 if (classButton.InvokeRequired)
                 {
-                    classButton.Invoke(new Action(() => classButton.Checked = true));
+                    if(RunningThreads)
+                        classButton.Invoke(new Action(() => classButton.Checked = true));
                 }
                 else
                 {
-                    classButton.Checked = true;
+                    if (RunningThreads)
+                        classButton.Checked = true;
                 }
 
                 if (typeButton.InvokeRequired)
                 {
-                    typeButton.Invoke(new Action(() => typeButton.Checked = true));
+                    if (RunningThreads)
+                        typeButton.Invoke(new Action(() => typeButton.Checked = true));
                 }
                 else
                 {
-                    typeButton.Checked = true;
+                    if (RunningThreads)
+                        typeButton.Checked = true;
                 }
 
 
@@ -630,6 +634,6 @@ namespace IPv4.Forms
         }
         #endregion
 
-        
+
     }
 }
