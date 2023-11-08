@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             grpExercices = new GroupBox();
             rbtnTable = new RadioButton();
             rbtnNetworkPropose = new RadioButton();
@@ -42,7 +43,8 @@
             githubToolStripMenuItem = new ToolStripMenuItem();
             btnTraining = new Button();
             btnExam = new Button();
-            button1 = new Button();
+            btnCalculator = new Button();
+            btnSettings = new Button();
             grpExercices.SuspendLayout();
             menuStrip1.SuspendLayout();
             SuspendLayout();
@@ -141,6 +143,7 @@
             quitterToolStripMenuItem.Name = "quitterToolStripMenuItem";
             quitterToolStripMenuItem.Size = new Size(111, 22);
             quitterToolStripMenuItem.Text = "Quitter";
+            quitterToolStripMenuItem.Click += quitterToolStripMenuItem_Click;
             // 
             // toolStripMenuItem1
             // 
@@ -154,12 +157,14 @@
             aProposToolStripMenuItem.Name = "aProposToolStripMenuItem";
             aProposToolStripMenuItem.Size = new Size(122, 22);
             aProposToolStripMenuItem.Text = "A Propos";
+            aProposToolStripMenuItem.Click += aProposToolStripMenuItem_Click;
             // 
             // githubToolStripMenuItem
             // 
             githubToolStripMenuItem.Name = "githubToolStripMenuItem";
             githubToolStripMenuItem.Size = new Size(122, 22);
             githubToolStripMenuItem.Text = "Github";
+            githubToolStripMenuItem.Click += githubToolStripMenuItem_Click;
             // 
             // btnTraining
             // 
@@ -181,30 +186,46 @@
             btnExam.UseVisualStyleBackColor = true;
             btnExam.Click += btnExam_Click;
             // 
-            // button1
+            // btnCalculator
             // 
-            button1.Location = new Point(283, 151);
-            button1.Name = "button1";
-            button1.Size = new Size(167, 56);
-            button1.TabIndex = 4;
-            button1.Text = "Décimale pointée <-> Décimale (32 bits)";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            btnCalculator.Location = new Point(283, 151);
+            btnCalculator.Name = "btnCalculator";
+            btnCalculator.Size = new Size(167, 56);
+            btnCalculator.TabIndex = 4;
+            btnCalculator.Text = "Décimale pointée <-> Décimale (32 bits)";
+            btnCalculator.UseVisualStyleBackColor = true;
+            btnCalculator.Click += btnCalculator_Click;
+            // 
+            // btnSettings
+            // 
+            btnSettings.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnSettings.BackgroundImage = Properties.Resources.settings1;
+            btnSettings.BackgroundImageLayout = ImageLayout.Stretch;
+            btnSettings.Location = new Point(410, 240);
+            btnSettings.Name = "btnSettings";
+            btnSettings.Size = new Size(40, 40);
+            btnSettings.TabIndex = 5;
+            btnSettings.UseVisualStyleBackColor = true;
+            btnSettings.Visible = false;
+            btnSettings.Click += btnSettings_Click;
             // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(462, 289);
-            Controls.Add(button1);
+            Controls.Add(btnSettings);
+            Controls.Add(btnCalculator);
             Controls.Add(btnExam);
             Controls.Add(btnTraining);
             Controls.Add(grpExercices);
             Controls.Add(menuStrip1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
             MaximizeBox = false;
             Name = "Main";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Adressage IP & sous-réseaux";
             grpExercices.ResumeLayout(false);
             grpExercices.PerformLayout();
@@ -230,6 +251,7 @@
         private ToolStripMenuItem githubToolStripMenuItem;
         private Button btnTraining;
         private Button btnExam;
-        private Button button1;
+        private Button btnCalculator;
+        private Button btnSettings;
     }
 }

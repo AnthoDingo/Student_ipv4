@@ -3,6 +3,7 @@ using IPv4.Class;
 using IPv4.Converter;
 using System.Diagnostics;
 using Type = IPv4.Class.Type;
+using Microsoft.VisualBasic;
 
 namespace IPv4.Forms
 {
@@ -13,6 +14,11 @@ namespace IPv4.Forms
         private int _exercices = 0;
         private int _errors = 0;
         private Mode _mode;
+        private Setting _setting;
+
+        private List<RadioButton> _btnsClass;
+        private List<RadioButton> _btnsType;
+        private List<RadioButton> _btnsMasque;
 
         public IP(Main frmMain, Mode mode = Mode.Decode, bool IsExam = false)
         {
@@ -29,6 +35,18 @@ namespace IPv4.Forms
                     break;
             }
             _isExam = IsExam;
+
+            _btnsClass = grpClasse.Controls.OfType<RadioButton>().OrderBy(r => r.TabIndex).ToList();
+            _btnsType = grpType.Controls.OfType<RadioButton>().OrderBy(r => r.TabIndex).ToList();
+            _btnsMasque = grpMasque.Controls.OfType<RadioButton>().OrderBy(r => r.TabIndex).ToList();
+
+            if (_isExam)
+            {
+                btnBack.Enabled = false;
+                btnBack.Visible = false;
+                this.ControlBox = false;
+                _setting = _frmMain.Settings;
+            }
         }
 
         #region Global
@@ -98,6 +116,34 @@ namespace IPv4.Forms
         {
             formClose();
         }
+
+        private void IP_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (_isExam)
+            {
+                Errors += 10;
+                MessageBox.Show("Vous avez tenter de tricher.\r\nPénalitée de 10 points.", "Tricheur", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                e.Cancel = true;
+            }
+        }
+
+        private void AnswerExam()
+        {
+            if (!_isExam)
+                return;
+
+            if(Exercices == _setting.Number)
+            {
+                string passwd = Interaction.InputBox("Bravo, vous avez finis.\r\nAppelez le prof pour valider votre exam.", "Terminé");
+                while (!_setting.Password.Equals(passwd))
+                {
+                    passwd = Interaction.InputBox("Bravo, vous avez finis.\r\nAppelez le prof pour valider votre exam.", "Terminé");
+                }
+                _isExam = false;
+                formClose();
+                this.Close();
+            }
+        }
         #endregion
 
         #region Mode Decode
@@ -115,7 +161,10 @@ namespace IPv4.Forms
 
         private void startDecodeThreads()
         {
-            rbtnA.Checked = false;
+            //rbtnA.Checked = false;
+            clearSelected(_btnsClass);
+            clearSelected(_btnsType);
+            clearSelected(_btnsMasque);
             //startDecodeThread(Decodes[0], $"lblBlock0", 223);
             for (int i = 0; i < Decodes.Length; i++)
             {
@@ -124,6 +173,14 @@ namespace IPv4.Forms
             resetLabelSolution(lblSolutionClass);
             resetLabelSolution(lblSolutionType);
             resetLabelSolution(lblSolutionMasque);
+        }
+
+        private void clearSelected(List<RadioButton> list)
+        {
+            foreach (RadioButton rb in list)
+            {
+                rb.Checked = false;
+            }
         }
 
         private void startDecodeThread(Thread thread, string name, int max)
@@ -329,6 +386,8 @@ namespace IPv4.Forms
 
             btnAnswer.Enabled = false;
             btnStop.Enabled = true;
+
+            AnswerExam();
         }
 
         #endregion
@@ -337,8 +396,7 @@ namespace IPv4.Forms
 
         private bool RunningPropose = true;
         private Thread[] Proposes = new Thread[2];
-        private List<RadioButton> _btnsClass;
-        private List<RadioButton> _btnsType;
+
         private List<TextBox> _tbxProposes;
 
         private void initPropose()
@@ -348,8 +406,7 @@ namespace IPv4.Forms
             lblSolutionMasque.Visible = false;
             lblSolution.Text = "Votre Proposition correspond à ...";
 
-            _btnsClass = grpClasse.Controls.OfType<RadioButton>().OrderBy(r => r.TabIndex).ToList();
-            _btnsType = grpType.Controls.OfType<RadioButton>().OrderBy(r => r.TabIndex).ToList();
+
             _tbxProposes = grpPropose.Controls.OfType<TextBox>().OrderBy(t => t.TabIndex).ToList();
 
             btnStop.Click += StopPropose;
@@ -364,7 +421,7 @@ namespace IPv4.Forms
 
         private void tbxTextChange(object sender, KeyPressEventArgs e)
         {
-            if(e.KeyChar == '.')
+            if (e.KeyChar == '.')
             {
                 Control control = sender as Control;
                 if (control != null)
@@ -373,8 +430,8 @@ namespace IPv4.Forms
                     int nextIndex = tabIndex + 1;
                     if (nextIndex < 4)
                     {
-                        TextBox next =_tbxProposes.First(tbx => tbx.TabIndex == nextIndex);
-                        next.Focus();                        
+                        TextBox next = _tbxProposes.First(tbx => tbx.TabIndex == nextIndex);
+                        next.Focus();
                     }
                     e.Handled = true;
                 }
@@ -524,6 +581,8 @@ namespace IPv4.Forms
 
             btnAnswer.Enabled = false;
             btnStop.Enabled = true;
+
+            AnswerExam();
         }
 
         private void UpdateRadioButton(object obj)
@@ -630,12 +689,12 @@ namespace IPv4.Forms
             }
             else
             {
-                if(min == max)
+                if (min == max)
                 {
-                    if(value == min)
+                    if (value == min)
                     {
                         tbx.BackColor = Color.LimeGreen;
-                    } 
+                    }
                     else
                     {
                         Errors += 1;
@@ -659,5 +718,7 @@ namespace IPv4.Forms
             }
         }
         #endregion
+
+        
     }
 }

@@ -594,7 +594,9 @@
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "IP";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Les classes IP";
+            FormClosing += IP_FormClosing;
             FormClosed += Decode_FormClosed;
             Load += Decode_Load;
             grpClasse.ResumeLayout(false);
