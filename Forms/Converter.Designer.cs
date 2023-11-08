@@ -44,6 +44,8 @@
             tbxIPv4 = new TextBox();
             rtbxResult = new RichTextBox();
             lblResult = new Label();
+            lblIPv4 = new Label();
+            lblValue = new Label();
             SuspendLayout();
             // 
             // btnIP2Int
@@ -168,7 +170,6 @@
             // 
             // btnInt2IP
             // 
-            btnInt2IP.Enabled = false;
             btnInt2IP.Location = new Point(119, 245);
             btnInt2IP.Name = "btnInt2IP";
             btnInt2IP.Size = new Size(139, 23);
@@ -179,7 +180,6 @@
             // 
             // tbxDec
             // 
-            tbxDec.Enabled = false;
             tbxDec.Location = new Point(119, 274);
             tbxDec.Name = "tbxDec";
             tbxDec.Size = new Size(136, 23);
@@ -214,11 +214,31 @@
             lblResult.TabIndex = 16;
             lblResult.Text = "Résultat";
             // 
+            // lblIPv4
+            // 
+            lblIPv4.AutoSize = true;
+            lblIPv4.Location = new Point(81, 44);
+            lblIPv4.Name = "lblIPv4";
+            lblIPv4.Size = new Size(35, 15);
+            lblIPv4.TabIndex = 17;
+            lblIPv4.Text = "IPv4 :";
+            // 
+            // lblValue
+            // 
+            lblValue.AutoSize = true;
+            lblValue.Location = new Point(71, 277);
+            lblValue.Name = "lblValue";
+            lblValue.Size = new Size(45, 15);
+            lblValue.TabIndex = 18;
+            lblValue.Text = "Valeur :";
+            // 
             // Converter
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(376, 469);
+            Controls.Add(lblValue);
+            Controls.Add(lblIPv4);
             Controls.Add(lblResult);
             Controls.Add(rtbxResult);
             Controls.Add(tbxIPv4);
@@ -260,5 +280,7 @@
         private TextBox tbxIPv4;
         private RichTextBox rtbxResult;
         private Label lblResult;
+        private Label lblIPv4;
+        private Label lblValue;
     }
 }

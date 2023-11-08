@@ -1,6 +1,7 @@
 ﻿using IPv4.Converter;
 using System.Net;
 using System.Numerics;
+using System.Text.RegularExpressions;
 
 namespace IPv4.Forms
 {
@@ -15,13 +16,12 @@ namespace IPv4.Forms
 
         private void btnIP2Int_Click(object sender, EventArgs e)
         {
-            if (!IPAddress.TryParse(tbxIPv4.Text, out _ipAddress))
+            if(!Regex.IsMatch(tbxIPv4.Text, @"^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$"))
             {
                 MessageBox.Show("Adresse IP invalide", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
-            //string[] ipBlocks = mtbxIPv4.Text.Split(".");
             string[] ipBlocks = tbxIPv4.Text.Split(".");
 
             tbxBlockInt0.Text = ipBlocks[0];
@@ -49,10 +49,8 @@ namespace IPv4.Forms
         private void btnInt2IP_Click(object sender, EventArgs e)
         {
             tbxResult.Text = tbxDec.Text;
-
-            BigInteger source = Convert.ToInt64(tbxDec.Text);
-            tbxBin.Text = source.ToBinaryString().PadLeft(32, '0');
-            //tbxBin.Text = Convert.ToString(source, 2).PadLeft(32, '0');
+            int source = (int)Convert.ToInt64(tbxDec.Text);
+            tbxBin.Text = Convert.ToString(source, 2).PadLeft(32, '0');
             tbxBlockBin0.Text = tbxBin.Text.Substring(0, 8);
             tbxBlockBin1.Text = tbxBin.Text.Substring(8, 8);
             tbxBlockBin2.Text = tbxBin.Text.Substring(16, 8);
