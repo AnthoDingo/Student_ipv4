@@ -38,7 +38,7 @@ namespace IPv4.Services
         public Setting ReadSettings(string filePath, byte[] key, byte[] iv)
         {
             byte[] encrypted;
-            using (BinaryReader reader = new BinaryReader(File.Open(filePath, FileMode.Open)))
+            using (BinaryReader reader = new BinaryReader(File.Open(filePath, FileMode.Open, FileAccess.Read)))
             {
                 encrypted = reader.ReadBytes((int)reader.BaseStream.Length);
             }
