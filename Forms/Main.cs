@@ -64,7 +64,8 @@ namespace IPv4.Forms
             }
             set
             {
-                _settingsManager.WriteSettings($"{_appPath}\\{_settingFileName}", value, Encoding.UTF8.GetBytes(_settingKey), Encoding.UTF8.GetBytes(_settingIV));
+                if (IsAdministrator())
+                    _settingsManager.WriteSettings($"{_appPath}\\{_settingFileName}", value, Encoding.UTF8.GetBytes(_settingKey), Encoding.UTF8.GetBytes(_settingIV));
             }
         }
 
@@ -93,7 +94,9 @@ namespace IPv4.Forms
                     IP frmPropose = new IP(this, Mode.Propose);
                     frmPropose.Show();
                     break;
-                case "rbtnNetworkDecode":
+                case "rbtnSubNetwork":
+                    SubNetwork subs = new SubNetwork();
+                    subs.Show();
                     break;
                 case "rbtnNetworkPropose":
                     break;

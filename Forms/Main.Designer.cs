@@ -32,7 +32,7 @@
             grpExercices = new GroupBox();
             rbtnTable = new RadioButton();
             rbtnNetworkPropose = new RadioButton();
-            rbtnNetworkDecode = new RadioButton();
+            rbtnSubNetwork = new RadioButton();
             rbtnPropose = new RadioButton();
             rbtnDecode = new RadioButton();
             menuStrip1 = new MenuStrip();
@@ -54,7 +54,7 @@
             grpExercices.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             grpExercices.Controls.Add(rbtnTable);
             grpExercices.Controls.Add(rbtnNetworkPropose);
-            grpExercices.Controls.Add(rbtnNetworkDecode);
+            grpExercices.Controls.Add(rbtnSubNetwork);
             grpExercices.Controls.Add(rbtnPropose);
             grpExercices.Controls.Add(rbtnDecode);
             grpExercices.Location = new Point(12, 27);
@@ -88,17 +88,17 @@
             rbtnNetworkPropose.UseVisualStyleBackColor = true;
             rbtnNetworkPropose.Visible = false;
             // 
-            // rbtnNetworkDecode
+            // rbtnSubNetwork
             // 
-            rbtnNetworkDecode.AutoSize = true;
-            rbtnNetworkDecode.Location = new Point(21, 84);
-            rbtnNetworkDecode.Name = "rbtnNetworkDecode";
-            rbtnNetworkDecode.Size = new Size(152, 19);
-            rbtnNetworkDecode.TabIndex = 2;
-            rbtnNetworkDecode.TabStop = true;
-            rbtnNetworkDecode.Text = "Décoder un sous-réseau";
-            rbtnNetworkDecode.UseVisualStyleBackColor = true;
-            rbtnNetworkDecode.Visible = false;
+            rbtnSubNetwork.AutoSize = true;
+            rbtnSubNetwork.Location = new Point(21, 84);
+            rbtnSubNetwork.Name = "rbtnSubNetwork";
+            rbtnSubNetwork.Size = new Size(152, 19);
+            rbtnSubNetwork.TabIndex = 2;
+            rbtnSubNetwork.TabStop = true;
+            rbtnSubNetwork.Text = "Décoder un sous-réseau";
+            rbtnSubNetwork.UseVisualStyleBackColor = true;
+            rbtnSubNetwork.Visible = false;
             // 
             // rbtnPropose
             // 
@@ -240,7 +240,7 @@
         private GroupBox grpExercices;
         private RadioButton rbtnTable;
         private RadioButton rbtnNetworkPropose;
-        private RadioButton rbtnNetworkDecode;
+        private RadioButton rbtnSubNetwork;
         private RadioButton rbtnPropose;
         private RadioButton rbtnDecode;
         private MenuStrip menuStrip1;
