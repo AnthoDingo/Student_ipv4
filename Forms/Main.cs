@@ -37,24 +37,6 @@ namespace IPv4.Forms
 
         private void LoadSetting()
         {
-            if (!Directory.Exists(_appPath))
-            {
-                if (IsAdministrator())
-                {
-                    Directory.CreateDirectory(_appPath);
-                }
-                else
-                {
-#if DEBUG
-                    Directory.CreateDirectory(_appPath);
-#else
-                    MessageBox.Show("Fichier de paramètre manquant.\r\nRelancer l'application en mode Administrateur.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    this.Close();
-#endif
-                }
-
-            }
-
             if (!File.Exists($"{_appPath}\\{_settingFileName}"))
             {
                 if (IsAdministrator())
