@@ -96,7 +96,7 @@
             // 
             lblError.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lblError.BorderStyle = BorderStyle.Fixed3D;
-            lblError.Location = new Point(309, 9);
+            lblError.Location = new Point(309, 13);
             lblError.Name = "lblError";
             lblError.Size = new Size(179, 33);
             lblError.TabIndex = 1;

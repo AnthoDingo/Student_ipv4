@@ -1,14 +1,10 @@
 ﻿using IPv4.Class;
 using IPv4.Converter;
 using IPv4.Services;
-using Microsoft.Toolkit.Uwp.Notifications;
-using Octokit;
 using System.Diagnostics;
 using System.Reflection;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Principal;
 using System.Text;
-using FileMode = System.IO.FileMode;
 
 namespace IPv4.Forms
 {
@@ -16,8 +12,13 @@ namespace IPv4.Forms
     {
         private Converter _frmConverter;
         private Setting _setting;
+        private SettingsManager _settingsManager = new SettingsManager();
         private string _appPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-        private string _settingFileName = "settings.dat";
+        private string _settingFileName = "settings_v2.dat";
+        
+        // Key you can change if needed
+        private string _settingKey = "k4o47#DB3@SD#orX";
+        private string _settingIV = "K9Z3HfmSBE%G*FH2";
 
         public Main()
         {
@@ -59,19 +60,11 @@ namespace IPv4.Forms
         {
             get
             {
-                BinaryFormatter formater = new BinaryFormatter();
-                using (FileStream fstream = new FileStream($"{_appPath}\\{_settingFileName}", FileMode.Open))
-                {
-                    return formater.Deserialize(fstream) as Setting;
-                }
+                return _settingsManager.ReadSettings($"{_appPath}\\{_settingFileName}", Encoding.UTF8.GetBytes(_settingKey), Encoding.UTF8.GetBytes(_settingIV));
             }
             set
             {
-                BinaryFormatter formater = new BinaryFormatter();
-                using (FileStream fstream = new FileStream($"{_appPath}\\{_settingFileName}", FileMode.Create))
-                {
-                    formater.Serialize(fstream, value);
-                }
+                _settingsManager.WriteSettings($"{_appPath}\\{_settingFileName}", value, Encoding.UTF8.GetBytes(_settingKey), Encoding.UTF8.GetBytes(_settingIV));
             }
         }
 

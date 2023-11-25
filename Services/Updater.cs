@@ -1,4 +1,4 @@
-﻿using Microsoft.Toolkit.Uwp.Notifications;
+﻿using CommunityToolkit.WinUI.Notifications;
 using Octokit;
 using System.Diagnostics;
 using System.Reflection;

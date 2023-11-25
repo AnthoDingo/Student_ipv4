@@ -235,12 +235,12 @@ namespace IPv4.Forms
 
                 if (label.InvokeRequired)
                 {
-                    if(RunningThreads)
+                    if (RunningThreads)
                         label.Invoke(new Action(() => label.Text = randomNumber.ToString()));
                 }
                 else
                 {
-                    if(RunningThreads)
+                    if (RunningThreads)
                         label.Text = randomNumber.ToString();
                 }
 #if DEBUG
@@ -537,7 +537,7 @@ namespace IPv4.Forms
 
                 if (classButton.InvokeRequired)
                 {
-                    if(RunningThreads)
+                    if (RunningThreads)
                         classButton.Invoke(new Action(() => classButton.Checked = true));
                 }
                 else
